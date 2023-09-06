@@ -423,9 +423,10 @@ if __name__ == '__main__':
             )
         with open(modlist_path, 'r') as modlist_file:
             modlist_data = yaml_safe_load(modlist_file)
+    latest_app_version = str(get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text)
     if (
         app_version
-        != str(get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text)
+        != latest_app_version
     ):
         is_app_updated = False
     else:
@@ -438,7 +439,7 @@ if __name__ == '__main__':
     )
     window.show()
 
-    download_url = 'https://github.com/Henrique-Coder/modding-helper/releases/download/v1.0.0/ModdingHelper-v1.0.0-fabric-mc1.20.1.exe'
+    download_url = f'https://github.com/Henrique-Coder/modding-helper/releases/download/v{latest_app_version}/ModdingHelper-v{latest_app_version}-fabric-mc1.20.1.exe'
     if not is_app_updated:
         message_box = QMessageBox(window)
         message_box.setWindowTitle('New version available')
