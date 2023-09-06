@@ -1,4 +1,4 @@
-version: 60
+version: 61
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -205,10 +205,6 @@ optimization:
   slug: tiefix
   description: Fixes some annoying bugs in the Minecraft client
   website_url: https://modrinth.com/mod/tiefix
-- name: Tape Stop
-  slug: tapestop
-  description: Prevents Anything from Rendering as You Leave!
-  website_url: https://modrinth.com/mod/tapestop
 ui:
 - name: 3D Skin Layers
   slug: 3dskinlayers
@@ -529,10 +525,6 @@ ui:
   slug: emi
   description: A featureful and accessible item and recipe viewer
   website_url: https://modrinth.com/mod/emi
-- name: Inventory Essentials
-  slug: inventory-essentials
-  description: Basic inventory tweaks. Lightweight and compatible.
-  website_url: https://modrinth.com/mod/inventory-essentials
 - name: asahi
   slug: asahi
   description: Remove jittering of the moving sun caused by client desync!
@@ -541,3 +533,8 @@ ui:
   slug: biome-moss
   description: Adds biome color variants for all moss.
   website_url: https://modrinth.com/mod/biome-moss
+- name: Inventory Profiles Next
+  slug: inventory-profiles-next
+  description: Take control over you inventory. Sort. Move matching Items. Throw all.
+    Locked slots. Gear sets! And much more.
+  website_url: https://modrinth.com/mod/inventory-profiles-next
