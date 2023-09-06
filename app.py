@@ -145,22 +145,18 @@ class ModdingHelperApp(QMainWindow):
         self.minecraft_dir_browse_button.clicked.connect(self.browse_minecraft_dir)
 
         # Initial terminal message
+        print('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
+        print('Modding Helper is not affiliated with any mod or modding community.')
+        print('Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.')
+        print('The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.')
+        print('Backup your current mods before installing new mods (highly recommended).')
+        print('If you have any problems, please contact the mod author by opening a issue in GitHub, have a nice modding!')
         self.update_console('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
-        self.update_console(
-            'Modding Helper is not affiliated with any mod or modding community.'
-        )
-        self.update_console(
-            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.'
-        )
-        self.update_console(
-            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.'
-        )
-        self.update_console(
-            'Backup your current mods before installing new mods (highly recommended).'
-        )
-        self.update_console(
-            'If you have any problems, please contact the mod author, have a nice modding!'
-        )
+        self.update_console('Modding Helper is not affiliated with any mod or modding community.')
+        self.update_console('Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.')
+        self.update_console('The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.')
+        self.update_console('Backup your current mods before installing new mods (highly recommended).')
+        self.update_console('If you have any problems, please contact the mod author, have a nice modding!')
 
     def get_modrinth_project_info(self, modrinth_slug_name: str):
         mod_loader = 'fabric'
@@ -173,7 +169,6 @@ class ModdingHelperApp(QMainWindow):
             return None
         mod_filename = project_data[0]['files'][0]['filename']
         mod_download_url = project_data[0]['files'][0]['url']
-        print(f'[+] Found mod: {mod_filename}')
         return mod_filename, mod_download_url
 
     def show_revert_popup(self):
@@ -185,6 +180,7 @@ class ModdingHelperApp(QMainWindow):
             if backup_folder_regex.match(folder.name)
         ]
         if not backup_folders:
+            print('No backups found!')
             self.update_console('No backups found!')
             QMessageBox.critical(
                 self,
@@ -209,6 +205,7 @@ class ModdingHelperApp(QMainWindow):
             for file in latest_backup.iterdir():
                 move(file, Path(minecraft_dir, 'mods'))
             rmtree(latest_backup)
+            print(f'Mods reverted to the lastest backup! ({latest_backup.name})')
             self.update_console(
                 f'Mods reverted to the lastest backup! ({latest_backup.name})'
             )
@@ -233,6 +230,7 @@ class ModdingHelperApp(QMainWindow):
         # self.install_button.setEnabled(False)
         # self.backup_checkbox.setEnabled(False)
 
+        print('Downloading mods...')
         self.update_console('Downloading mods...')
 
         if backup_selected:
@@ -246,13 +244,16 @@ class ModdingHelperApp(QMainWindow):
             mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
             these_mod_filenames.append(mod_filename)
             if Path(minecraft_dir, 'mods', mod_filename).exists():
+                print(f'Mod {mod["name"]} is already installed!')
                 self.update_console(f'Mod {mod["name"]} is already installed!')
                 continue
             if not mod_filename or not mod_download_url:
+                print(f'Error downloading mod: {mod["name"]}')
                 self.update_console(f'Error downloading mod: {mod["name"]}')
                 continue
             with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                 mod_file.write(get(mod_download_url, allow_redirects=True).content)
+            print(f'Mod {mod["name"]} was successfully installed!')
             self.update_console(f'Mod {mod["name"]} was successfully installed!')
         if self.nvidia_radio_yes.isChecked():
             for mod in modlist_data['nvidia_gpu']:
@@ -261,25 +262,31 @@ class ModdingHelperApp(QMainWindow):
                 )
                 these_mod_filenames.append(mod_filename)
                 if Path(minecraft_dir, 'mods', mod_filename).exists():
+                    print(f'Mod {mod["name"]} is already installed!')
                     self.update_console(f'Mod {mod["name"]} is already installed!')
                     continue
                 if not mod_filename or not mod_download_url:
+                    print(f'Error downloading mod: {mod["name"]}')
                     self.update_console(f'Error downloading mod: {mod["name"]}')
                     continue
                 with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                     mod_file.write(get(mod_download_url, allow_redirects=True).content)
+                print(f'Mod {mod["name"]} was successfully installed!')
                 self.update_console(f'Mod {mod["name"]} was successfully installed!')
         for mod in modlist_data['optimization']:
             mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
             these_mod_filenames.append(mod_filename)
             if Path(minecraft_dir, 'mods', mod_filename).exists():
+                print(f'Mod {mod["name"]} is already installed!')
                 self.update_console(f'Mod {mod["name"]} is already installed!')
                 continue
             if not mod_filename or not mod_download_url:
+                print(f'Error downloading mod: {mod["name"]}')
                 self.update_console(f'Error downloading mod: {mod["name"]}')
                 continue
             with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                 mod_file.write(get(mod_download_url, allow_redirects=True).content)
+            print(f'Mod {mod["name"]} was successfully installed!')
             self.update_console(f'Mod {mod["name"]} was successfully installed!')
         for mod in modlist_data['ui']:
             if mod['name'] in selected_mods:
@@ -288,17 +295,21 @@ class ModdingHelperApp(QMainWindow):
                 )
                 these_mod_filenames.append(mod_filename)
                 if Path(minecraft_dir, 'mods', mod_filename).exists():
+                    print(f'Mod {mod["name"]} is already installed!')
                     self.update_console(f'Mod {mod["name"]} is already installed!')
                     continue
                 if not mod_filename or not mod_download_url:
+                    print(f'Error downloading mod: {mod["name"]}')
                     self.update_console(f'Error downloading mod: {mod["name"]}')
                     continue
                 with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                     mod_file.write(get(mod_download_url, allow_redirects=True).content)
+                print(f'Mod {mod["name"]} was successfully installed!')
                 self.update_console(f'Mod {mod["name"]} was successfully installed!')
         for file in Path(minecraft_dir, 'mods').iterdir():
             if file.name.endswith('.jar') and file.name not in these_mod_filenames:
                 remove(file)
+                print(f'Old mod {file.name} was successfully removed!')
                 self.update_console(f'Old mod {file.name} was successfully removed!')
         # TODO: asyncronous install
         # self.nvidia_radio_yes.setEnabled(True)
@@ -359,16 +370,14 @@ class ModdingHelperApp(QMainWindow):
     def on_nvidia_radio_yes(self):
         if self.nvidia_radio_no.isChecked():
             self.nvidia_radio_no.setChecked(False)
-            self.update_console(
-                'OFF - Mods made for NVIDIA graphics cards will not be installed.'
-            )
+            print('OFF - Mods made for NVIDIA graphics cards will not be installed.')
+            self.update_console('OFF - Mods made for NVIDIA graphics cards will not be installed.')
 
     def on_nvidia_radio_no(self):
         if self.nvidia_radio_yes.isChecked():
             self.nvidia_radio_yes.setChecked(False)
-            self.update_console(
-                'ON - Mods made for NVIDIA graphics cards will be installed.'
-            )
+            print('ON - Mods made for NVIDIA graphics cards will be installed.')
+            self.update_console('ON - Mods made for NVIDIA graphics cards will be installed.')
 
 
 if __name__ == '__main__':
