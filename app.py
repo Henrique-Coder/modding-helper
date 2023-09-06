@@ -397,7 +397,7 @@ if __name__ == '__main__':
     if modlist_path.exists():
         latest_modlist_version = str(
             get(
-                f'{updater_api_base_url}/app_version.txt',
+                f'{updater_api_base_url}/modlist_version.txt',
                 allow_redirects=True,
             ).text
         )
@@ -425,7 +425,7 @@ if __name__ == '__main__':
             modlist_data = yaml_safe_load(modlist_file)
     if (
         app_version
-        != get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text
+        != str(get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text)
     ):
         is_app_updated = False
     else:
@@ -434,11 +434,11 @@ if __name__ == '__main__':
     app.setWindowIcon(QtGui.QIcon(str(favicon_path)))
     window = ModdingHelperApp()
     window.setWindowTitle(
-        f'Modding Helper {app_version} [Modlist Version: {modlist_data["version"]}]'
+        f'Modding Helper {app_version} [Modlist: {modlist_data["version"]}]'
     )
     window.show()
 
-    download_url = 'https://github.com/Henrique-Coder/modding-helper/releases/latest'
+    download_url = 'https://github.com/Henrique-Coder/modding-helper/releases/download/v1.0.0/ModdingHelper-v1.0.0-fabric-mc1.20.1.exe'
     if not is_app_updated:
         message_box = QMessageBox(window)
         message_box.setWindowTitle('New version available')
