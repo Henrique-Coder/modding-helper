@@ -6,5 +6,5 @@ __pycache__
 # Other folders/files
 .compiler
 .51
-modlist_updater_api
 *.bat
+allmods.yaml
