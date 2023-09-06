@@ -1,0 +1,10 @@
+# IDE folders/files
+.idea
+venv
+__pycache__
+
+# Other folders/files
+.compiler
+.51
+modlist_updater_api
+*.bat
