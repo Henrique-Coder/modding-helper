@@ -1,0 +1,543 @@
+version: 60
+mod_libs:
+- name: Bookshelf
+  slug: bookshelf-lib
+  description: An open source library for other mods!
+  website_url: https://modrinth.com/mod/bookshelf-lib
+- name: Cloth Config API
+  slug: cloth-config
+  description: Configuration Library for Minecraft Mods
+  website_url: https://modrinth.com/mod/cloth-config
+- name: CompleteConfig
+  slug: completeconfig
+  description: Configuration Library for Fabric Mods
+  website_url: https://modrinth.com/mod/completeconfig
+- name: CraterLib
+  slug: craterlib
+  description: Library mod for HypherionSA and First Dark Development mods
+  website_url: https://modrinth.com/mod/craterlib
+- name: Fabric API
+  slug: fabric-api
+  description: Lightweight and modular API providing common hooks and intercompatibility
+    measures utilized by mods using the Fabric toolchain.
+  website_url: https://modrinth.com/mod/fabric-api
+- name: Fabric Language Kotlin
+  slug: fabric-language-kotlin
+  description: Fabric Language Kotlin
+  website_url: https://modrinth.com/mod/fabric-language-kotlin
+- name: libIPN
+  slug: libipn
+  description: Inventory Profiles Next GUI/Config library
+  website_url: https://modrinth.com/mod/libipn
+- name: LibJF
+  slug: libjf
+  description: A library for my mods
+  website_url: https://modrinth.com/mod/libjf
+- name: "o\u03C9o (owo-lib)"
+  slug: owo-lib
+  description: A general utility, GUI and config library for modding on Fabric and
+    Quilt
+  website_url: https://modrinth.com/mod/owo-lib
+- name: YetAnotherConfigLib
+  slug: yacl
+  description: A builder-based configuration library for Minecraft.
+  website_url: https://modrinth.com/mod/yacl
+- name: Balm
+  slug: balm
+  description: "Abstraction Layer (but not really)\u2122 for Blay's multiplatform\
+    \ mods"
+  website_url: https://modrinth.com/mod/balm
+- name: Puzzles Lib
+  slug: puzzles-lib
+  description: Why's it called Puzzles you ask? That's the puzzle!
+  website_url: https://modrinth.com/mod/puzzles-lib
+- name: Forge Config API Port
+  slug: forge-config-api-port
+  description: Forge's whole config system provided to the Fabric ecosystem. Designed
+    for a multiloader architecture.
+  website_url: https://modrinth.com/mod/forge-config-api-port
+nvidia_gpu:
+- name: Nvidium
+  slug: nvidium
+  description: Fast nvidia only rendering engine for sodium
+  website_url: https://modrinth.com/mod/nvidium
+optimization:
+- name: BactroMod
+  slug: bactromod
+  description: Visual optimizations for a better ingame experience (customize fog,
+    gamma multiplier (fullbright), low shield, low fire, disable pumpkin blur ...)
+  website_url: https://modrinth.com/mod/bactromod
+- name: Better Beds
+  slug: better-beds
+  description: 'Changes the renderer of the bed to use json models instead of a block
+    entity renderer! '
+  website_url: https://modrinth.com/mod/better-beds
+- name: Concurrent Chunk Management Engine (Fabric)
+  slug: c2me-fabric
+  description: A Fabric mod designed to improve the chunk performance of Minecraft.
+  website_url: https://modrinth.com/mod/c2me-fabric
+- name: Cull Less Leaves
+  slug: cull-less-leaves
+  description: Cull leaves while looking hot!
+  website_url: https://modrinth.com/mod/cull-less-leaves
+- name: DashLoader
+  slug: dashloader
+  description: Launch at the speed of light.
+  website_url: https://modrinth.com/mod/dashloader
+- name: Debugify
+  slug: debugify
+  description: Fixes Minecraft bugs found on the bug tracker
+  website_url: https://modrinth.com/mod/debugify
+- name: Dynamic FPS
+  slug: dynamic-fps
+  description: Improve performance when Minecraft is in the background.
+  website_url: https://modrinth.com/mod/dynamic-fps
+- name: Enhanced Block Entities
+  slug: ebe
+  description: Reduce FPS lag with block entities, as well as customize them with
+    resource packs
+  website_url: https://modrinth.com/mod/ebe
+- name: Enhanced Attack Indicator
+  slug: enhanced-attack-indicator
+  description: 'Uses the attack indicator for more than just melee attacks '
+  website_url: https://modrinth.com/mod/enhanced-attack-indicator
+- name: Entity Culling
+  slug: entityculling
+  description: Using async path-tracing to hide Block-/Entities that are not visible
+  website_url: https://modrinth.com/mod/entityculling
+- name: Exordium
+  slug: exordium
+  description: 'Render the GUI and screens at a lower framerate to speed up what''s
+    really important: the worldrendering.'
+  website_url: https://modrinth.com/mod/exordium
+- name: Fastload
+  slug: fastload
+  description: Modifies how worlds are loaded to speed up loading times.
+  website_url: https://modrinth.com/mod/fastload
+- name: FerriteCore
+  slug: ferrite-core
+  description: Memory usage optimizations
+  website_url: https://modrinth.com/mod/ferrite-core
+- name: FeyTweaks
+  slug: feytweaks
+  description: Mod for optimizing signs and beacons.
+  website_url: https://modrinth.com/mod/feytweaks
+- name: ImmediatelyFast
+  slug: immediatelyfast
+  description: Speed up immediate mode rendering in Minecraft
+  website_url: https://modrinth.com/mod/immediatelyfast
+- name: Indium
+  slug: indium
+  description: Sodium addon providing support for the Fabric Rendering API, based
+    on Indigo
+  website_url: https://modrinth.com/mod/indium
+- name: Iris Shaders
+  slug: iris
+  description: A modern shaders mod for Minecraft intended to be compatible with existing
+    OptiFine shader packs
+  website_url: https://modrinth.com/mod/iris
+- name: Krypton
+  slug: krypton
+  description: A mod to optimize the Minecraft networking stack
+  website_url: https://modrinth.com/mod/krypton
+- name: lazy-language-loader
+  slug: lazy-language-loader
+  description: lazy-language-loader improves loading times when changing your language
+    by only reloading the language instead of all the game resources!
+  website_url: https://modrinth.com/mod/lazy-language-loader
+- name: LazyDFU
+  slug: lazydfu
+  description: Makes the game boot faster by deferring non-essential initialization
+  website_url: https://modrinth.com/mod/lazydfu
+- name: Lithium
+  slug: lithium
+  description: No-compromises game logic/server optimization mod
+  website_url: https://modrinth.com/mod/lithium
+- name: Log Cleaner
+  slug: log-cleaner
+  description: A lightweight mod that cleans old, unused log files
+  website_url: https://modrinth.com/mod/log-cleaner
+- name: FastAnim
+  slug: fastanim
+  description: Speeds up entity animation calculations!
+  website_url: https://modrinth.com/mod/fastanim
+- name: ModernFix
+  slug: modernfix
+  description: All-in-one mod that improves performance, reduces memory usage, and
+    fixes many bugs. Compatible with all your favorite performance mods!
+  website_url: https://modrinth.com/mod/modernfix
+- name: Mod Menu
+  slug: modmenu
+  description: Adds a mod menu to view the list of mods you have installed.
+  website_url: https://modrinth.com/mod/modmenu
+- name: Noxesium
+  slug: noxesium
+  description: A client-side fabric mod with various changes and performance improvements.
+  website_url: https://modrinth.com/mod/noxesium
+- name: Reese's Sodium Options
+  slug: reeses-sodium-options
+  description: Alternative Options Menu for Sodium
+  website_url: https://modrinth.com/mod/reeses-sodium-options
+- name: Remove Reloading Screen
+  slug: rrls
+  description: Makes resource packs load in the background, allowing you to do other
+    things while waiting!
+  website_url: https://modrinth.com/mod/rrls
+- name: Sodium Extra
+  slug: sodium-extra
+  description: Features that shouldn't be in Sodium.
+  website_url: https://modrinth.com/mod/sodium-extra
+- name: Sodium
+  slug: sodium
+  description: A modern rendering engine for Minecraft which greatly improves performance
+  website_url: https://modrinth.com/mod/sodium
+- name: Starlight (Fabric)
+  slug: starlight
+  description: Rewrites the light engine to fix lighting performance and lighting
+    errors
+  website_url: https://modrinth.com/mod/starlight
+- name: ThreadTweak
+  slug: threadtweak
+  description: "Improve and tweak Minecraft thread scheduling. Fork of Smooth Boot\
+    \ for \u22651.20"
+  website_url: https://modrinth.com/mod/threadtweak
+- name: TieFix
+  slug: tiefix
+  description: Fixes some annoying bugs in the Minecraft client
+  website_url: https://modrinth.com/mod/tiefix
+- name: Tape Stop
+  slug: tapestop
+  description: Prevents Anything from Rendering as You Leave!
+  website_url: https://modrinth.com/mod/tapestop
+ui:
+- name: 3D Skin Layers
+  slug: 3dskinlayers
+  description: Render the player skin layer in 3d!
+  website_url: https://modrinth.com/mod/3dskinlayers
+- name: AppleSkin
+  slug: appleskin
+  description: Food/hunger-related HUD improvements
+  website_url: https://modrinth.com/mod/appleskin
+- name: Athena
+  slug: athena-ctm
+  description: A crossplatform (Forge/Fabric) solution to connected block textures
+    for 1.19.4+
+  website_url: https://modrinth.com/mod/athena-ctm
+- name: Auth Me
+  slug: auth-me
+  description: Authenticate yourself and re-validate your session
+  website_url: https://modrinth.com/mod/auth-me
+- name: AutoSwitch
+  slug: autoswitch
+  description: Automatic switching of tools when you perform an action.
+  website_url: https://modrinth.com/mod/autoswitch
+- name: Better Suggestions
+  slug: better-suggestions
+  description: Makes Minecraft command suggestions more useful.
+  website_url: https://modrinth.com/mod/better-suggestions
+- name: Better Command Block UI
+  slug: bettercommandblockui
+  description: Provides a more usable Command Block UI
+  website_url: https://modrinth.com/mod/bettercommandblockui
+- name: Better Statistics Screen
+  slug: better-stats
+  description: A Minecraft mod that improves the statistics screen and makes it more
+    useful.
+  website_url: https://modrinth.com/mod/better-stats
+- name: Blur (Fabric)
+  slug: blur-fabric
+  description: Adds a blur effect to all GUI backgrounds - now for Fabric!
+  website_url: https://modrinth.com/mod/blur-fabric
+- name: BoatHud
+  slug: boathud
+  description: Sailing fast in style!
+  website_url: https://modrinth.com/mod/boathud
+- name: Bobby
+  slug: bobby
+  description: Allows for render distances greater than the server's view-distance
+  website_url: https://modrinth.com/mod/bobby
+- name: Borderless Mining
+  slug: borderless-mining
+  description: Changes Fullscreen to use a borderless window.
+  website_url: https://modrinth.com/mod/borderless-mining
+- name: Bounced
+  slug: bounced
+  description: Get Your Minecraft Titles Bounced!
+  website_url: https://modrinth.com/mod/bounced
+- name: CameraOverhaul
+  slug: cameraoverhaul
+  description: 'A mod that makes gameplay & movement more satisfying through the use
+    of various camera tilting. '
+  website_url: https://modrinth.com/mod/cameraoverhaul
+- name: Capes
+  slug: capes
+  description: Lets you use capes from OptiFine, LabyMod and other cape mods
+  website_url: https://modrinth.com/mod/capes
+- name: Chat Patches
+  slug: chatpatches
+  description: A Minecraft Fabric client-side mod that touches up a few aspects of
+    Minecraft's mundane chat, with as much configurability as possible!
+  website_url: https://modrinth.com/mod/chatpatches
+- name: Chat Heads
+  slug: chat-heads
+  description: See who you're chatting with!
+  website_url: https://modrinth.com/mod/chat-heads
+- name: Cherished Worlds
+  slug: cherished-worlds
+  description: Favorite/pin/bookmark certain worlds, which will always be at the top
+    of the list and cannot be deleted.
+  website_url: https://modrinth.com/mod/cherished-worlds
+- name: Clear Enchanting
+  slug: clear-enchanting
+  description: Shows the enchantment table's enchantments without having to hover
+    over them.
+  website_url: https://modrinth.com/mod/clear-enchanting
+- name: Clear Void
+  slug: clear-void
+  description: Remove the pitch black bottom half of the skybox at low Y levels. For
+    skyblock players.
+  website_url: https://modrinth.com/mod/clear-void
+- name: Client Tweaks
+  slug: client-tweaks
+  description: 'There, I fixed Minecraft for you. Various optional tweaks to improve
+    Minecraft Quality of Life. '
+  website_url: https://modrinth.com/mod/client-tweaks
+- name: Continue Button
+  slug: continue
+  description: Continue the last world or server you played from the title screen.
+    An updated continuation of the original mod for 1.19+
+  website_url: https://modrinth.com/mod/continue
+- name: Continuity
+  slug: continuity
+  description: A Fabric mod that allows for efficient connected textures
+  website_url: https://modrinth.com/mod/continuity
+- name: DeathLog
+  slug: deathlog
+  description: Keeps track of the many embarrassing times you died
+  website_url: https://modrinth.com/mod/deathlog
+- name: Draggable Lists
+  slug: draggable-lists
+  description: Draggable resource packs, datapacks, servers and worlds
+  website_url: https://modrinth.com/mod/draggable-lists
+- name: Enchantment Descriptions
+  slug: enchantment-descriptions
+  description: Provides a way to get enchantment descriptions from enchanted books.
+  website_url: https://modrinth.com/mod/enchantment-descriptions
+- name: Explosive Enhancement
+  slug: explosive-enhancement
+  description: Makes the explosion animation look cooler.
+  website_url: https://modrinth.com/mod/explosive-enhancement
+- name: Falling Leaves
+  slug: fallingleaves
+  description: Adds a neat little particle effect to leaf blocks
+  website_url: https://modrinth.com/mod/fallingleaves
+- name: Freelook
+  slug: freelook
+  description: This mod allows you to "move your head" without moving your player's
+    heads rotation. Much like you can in lunar / badlion client, hold/press the keybind
+    and look around while staying in whichever direction you are moving.
+  website_url: https://modrinth.com/mod/freelook
+- name: Held Item Info
+  slug: held-item-info
+  description: Shows information (like enchantments) about the held item under its
+    name.
+  website_url: https://modrinth.com/mod/held-item-info
+- name: Interactic
+  slug: interactic
+  description: Refined item interactions
+  website_url: https://modrinth.com/mod/interactic
+- name: Isometric Renders
+  slug: isometric-renders
+  description: Creates high-resolution isometric screenshots of game objects
+  website_url: https://modrinth.com/mod/isometric-renders
+- name: "Jade \U0001F50D"
+  slug: jade
+  description: Shows information about what you are looking at. (Hwyla/Waila fork
+    for Minecraft 1.16+)
+  website_url: https://modrinth.com/mod/jade
+- name: LambDynamicLights
+  slug: lambdynamiclights
+  description: A dynamic lights mod for Fabric.
+  website_url: https://modrinth.com/mod/lambdynamiclights
+- name: mineQuery
+  slug: minequery
+  description: A helping mod at client side
+  website_url: https://modrinth.com/mod/minequery
+- name: Mod Loading Screen
+  slug: mod-loading-screen
+  description: An advanced loading screen with the loading progress of mods
+  website_url: https://modrinth.com/mod/mod-loading-screen
+- name: Multiplayer Button
+  slug: multiplayer-button
+  description: Adds a multiplayer button to the pause menu.
+  website_url: https://modrinth.com/mod/multiplayer-button
+- name: Not Enough Animations
+  slug: not-enough-animations
+  description: Bringing first-person animations to the third-person
+  website_url: https://modrinth.com/mod/not-enough-animations
+- name: Presence Footsteps
+  slug: presence-footsteps
+  description: ..An Overly complicated Sound Mod...
+  website_url: https://modrinth.com/mod/presence-footsteps
+- name: Reimagined World Menu
+  slug: reimagined-world-menu
+  description: Completely re-design the Create World menu.
+  website_url: https://modrinth.com/mod/reimagined-world-menu
+- name: Resourcify
+  slug: resourcify
+  description: In-game resource pack, data pack and shader browser and updater
+  website_url: https://modrinth.com/mod/resourcify
+- name: Screenshot Uploader
+  slug: screenshotuploader
+  description: Making screenshotting a bit easier
+  website_url: https://modrinth.com/mod/screenshotuploader
+- name: Screenshot Viewer
+  slug: screenshot-viewer
+  description: View your screenshots in game!
+  website_url: https://modrinth.com/mod/screenshot-viewer
+- name: Server Country Flags
+  slug: server-country-flags
+  description: Adds a flag to servers in the server list which tells where the server
+    is located.
+  website_url: https://modrinth.com/mod/server-country-flags
+- name: Server Pinger Fixer
+  slug: serverpingerfixer
+  description: Improves pinging speed of the multiplayer server list
+  website_url: https://modrinth.com/mod/serverpingerfixer
+- name: Smooth Particles
+  slug: smooth-particles
+  description: Adds the functionality to spawn particles when you place a block
+  website_url: https://modrinth.com/mod/smooth-particles
+- name: Sodium Shadowy Path Blocks
+  slug: sodium-shadowy-path-blocks
+  description: 'Reintroduces vanilla-like smooth lighting to non-full blocks (e.g.
+    dirt paths and how they have dark shading when directly next to a full block)
+    when using Sodium. '
+  website_url: https://modrinth.com/mod/sodium-shadowy-path-blocks
+- name: Sound Physics Remastered
+  slug: sound-physics-remastered
+  description: A Minecraft mod that provides realistic sound attenuation, reverberation,
+    and absorption through blocks.
+  website_url: https://modrinth.com/mod/sound-physics-remastered
+- name: Status Effect Bars
+  slug: status-effect-bars
+  description: Adds customizable bars to the status effects overlay to show the remaining
+    duration of effects.
+  website_url: https://modrinth.com/mod/status-effect-bars
+- name: Symbol Chat
+  slug: symbol-chat
+  description: A client side mod that adds a symbol/emoji menu as well as writing
+    in different unicode fonts.
+  website_url: https://modrinth.com/mod/symbol-chat
+- name: Visuality
+  slug: visuality
+  description: Little visual improvements by adding a bunch of new particles.
+  website_url: https://modrinth.com/mod/visuality
+- name: Simple Voice Chat
+  slug: simple-voice-chat
+  description: A working voice chat in Minecraft!
+  website_url: https://modrinth.com/mod/simple-voice-chat
+- name: Wavey Capes
+  slug: wavey-capes
+  description: The cape shouldn't be a static slab
+  website_url: https://modrinth.com/mod/wavey-capes
+- name: Xaero's World Map
+  slug: xaeros-world-map
+  description: Adds a full screen world map which shows you what you have explored
+    in the world. Works great together with Xaero's Minimap.
+  website_url: https://modrinth.com/mod/xaeros-world-map
+- name: Xaero's Minimap
+  slug: xaeros-minimap
+  description: Displays the nearby world terrain, players, mobs, entities in the corner
+    of your screen. Lets you create waypoints which help you find the locations you've
+    marked.
+  website_url: https://modrinth.com/mod/xaeros-minimap
+- name: Zoomify
+  slug: zoomify
+  description: A zoom mod with infinite customizability.
+  website_url: https://modrinth.com/mod/zoomify
+- name: Fog Looks Good Now [Fabric]
+  slug: fog-looks-good-now-fabric
+  description: Helps fog look better by moving the fog start closer.
+  website_url: https://modrinth.com/mod/fog-looks-good-now-fabric
+- name: Numeral Ping
+  slug: numeral-ping
+  description: Display the ping for each player.
+  website_url: https://modrinth.com/mod/numeral-ping
+- name: Who am I?
+  slug: whoami
+  description: Shows your player nametag in the Inventory and third person view!
+  website_url: https://modrinth.com/mod/whoami
+- name: Better End Sky
+  slug: better-end-sky
+  description: Ripoff of the Better End mod's sky renderer in a standalone mod for
+    a client-side only usage.
+  website_url: https://modrinth.com/mod/better-end-sky
+- name: Make Bubbles Pop
+  slug: make_bubbles_pop
+  description: Client-side mod that makes bubble particles pop and lets them rise
+    realistically to the water surface.
+  website_url: https://modrinth.com/mod/make_bubbles_pop
+- name: Wakes
+  slug: wakes
+  description: A mod that adds wakes after boats (and all other entites) if they travel
+    fast enough
+  website_url: https://modrinth.com/mod/wakes
+- name: Particle Rain
+  slug: particle-rain
+  description: Replaces rain with particle effects
+  website_url: https://modrinth.com/mod/particle-rain
+- name: Resource Pack Overrides
+  slug: resource-pack-overrides
+  description: Ensures important resource packs stay always active and helps clean
+    up the pack selection screen.
+  website_url: https://modrinth.com/mod/resource-pack-overrides
+- name: Panda's Extra Details
+  slug: pandas-extra-details
+  description: A mod that adds extra Details to Minecraft for both Forge and Fabric
+  website_url: https://modrinth.com/mod/pandas-extra-details
+- name: myl7/autofish
+  slug: myl7autofish
+  description: 'Fork of MrTroot/autofish to build for Minecraft post-1.19.3 versions.
+
+    Changes are from the upstream pull requests and stated in the commit messages.'
+  website_url: https://modrinth.com/mod/myl7autofish
+- name: Overflowing Bars
+  slug: overflowing-bars
+  description: Expand health, armor and armor toughness bars beyond vanilla. Nice
+    and compact without confusing colors.
+  website_url: https://modrinth.com/mod/overflowing-bars
+- name: CursorCentered Fix
+  slug: cursorcentered-fix
+  description: A Minecraft mod that fix the cursor centering issue that occasionally
+    happens when opening a GUI.
+  website_url: https://modrinth.com/mod/cursorcentered-fix
+- name: Don't Untoggle Sprint
+  slug: dont-untoggle-sprint
+  description: Prevents sprint being toggled off on respawn after a death
+  website_url: https://modrinth.com/mod/dont-untoggle-sprint
+- name: TODO List
+  slug: todo-list
+  description: A mod to organize your thoughts and tasks that you have planned for
+    yourself!
+  website_url: https://modrinth.com/mod/todo-list
+- name: Effect Descriptions
+  slug: effect-descriptions
+  description: Find out what potion effects do without checking the wiki.
+  website_url: https://modrinth.com/mod/effect-descriptions
+- name: EMI
+  slug: emi
+  description: A featureful and accessible item and recipe viewer
+  website_url: https://modrinth.com/mod/emi
+- name: Inventory Essentials
+  slug: inventory-essentials
+  description: Basic inventory tweaks. Lightweight and compatible.
+  website_url: https://modrinth.com/mod/inventory-essentials
+- name: asahi
+  slug: asahi
+  description: Remove jittering of the moving sun caused by client desync!
+  website_url: https://modrinth.com/mod/asahi
+- name: Biome Moss
+  slug: biome-moss
+  description: Adds biome color variants for all moss.
+  website_url: https://modrinth.com/mod/biome-moss
