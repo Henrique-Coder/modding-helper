@@ -1,2 +1,1 @@
-# modding-helper
- 
+![Image demonstrating the app's home screen](https://i.imgur.com/mR1Ee3C.png)
