@@ -1,4 +1,4 @@
-version: 61
+version: 62
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -538,3 +538,20 @@ ui:
   description: Take control over you inventory. Sort. Move matching Items. Throw all.
     Locked slots. Gear sets! And much more.
   website_url: https://modrinth.com/mod/inventory-profiles-next
+- name: MineMath
+  slug: minemath
+  description: MineMath - Your Mathematical GUI Calculator Companion in Minecraft
+  website_url: https://modrinth.com/mod/minemath
+- name: Emotecraft
+  slug: emotecraft
+  description: Create your own emotes in Minecraft.
+  website_url: https://modrinth.com/mod/emotecraft
+- name: Online Emotes
+  slug: online-emotes
+  description: Allows players to see each other's emotes without emotecraft installed
+    on the server.
+  website_url: https://modrinth.com/mod/online-emotes
+- name: ChatShot
+  slug: chatshot
+  description: Copy chat messages as text or a nice transparent image with one click.
+  website_url: https://modrinth.com/mod/chatshot
