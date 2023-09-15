@@ -1,4 +1,4 @@
-version: 62
+version: 63
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -56,6 +56,15 @@ mod_libs:
   description: Forge's whole config system provided to the Fabric ecosystem. Designed
     for a multiloader architecture.
   website_url: https://modrinth.com/mod/forge-config-api-port
+- name: Better Runtime Resource Pack (BRRP)
+  slug: brrp
+  description: A library mod to generated resource at runtime. Based on and made enhancements
+    on ARRP mod.
+  website_url: https://modrinth.com/mod/brrp
+- name: ukulib
+  slug: ukulib
+  description: small utility library used in my mods
+  website_url: https://modrinth.com/mod/ukulib
 nvidia_gpu:
 - name: Nvidium
   slug: nvidium
@@ -555,3 +564,13 @@ ui:
   slug: chatshot
   description: Copy chat messages as text or a nice transparent image with one click.
   website_url: https://modrinth.com/mod/chatshot
+- name: TierTagger (View other tiers!)
+  slug: tiertagger
+  description: A awesome mod which displays everyone's tier from the Vanilla Pvp Tierlist
+  website_url: https://modrinth.com/mod/tiertagger
+- name: Stop P2W
+  slug: stopp2w
+  description: 'The best option to prevent Pay To Win!
+
+    Live Server Data!'
+  website_url: https://modrinth.com/mod/stopp2w
