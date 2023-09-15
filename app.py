@@ -33,7 +33,7 @@ class ModdingHelperApp(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
-        self.setGeometry(100, 100, 940, 740)
+        self.setGeometry(100, 100, 940, 800)  # x, y, width, height
         self.setFixedSize(self.size())
 
         self.nvidia_radio_yes = QRadioButton(
@@ -147,16 +147,34 @@ class ModdingHelperApp(QMainWindow):
         # Initial terminal message
         print('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
         print('Modding Helper is not affiliated with any mod or modding community.')
-        print('Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.')
-        print('The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.')
-        print('Backup your current mods before installing new mods (highly recommended).')
-        print('If you have any problems, please contact the mod author by opening a issue in GitHub, have a nice modding!')
+        print(
+            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.'
+        )
+        print(
+            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.'
+        )
+        print(
+            'Backup your current mods before installing new mods (highly recommended).'
+        )
+        print(
+            'If you have any problems, please contact the mod author by opening a issue in GitHub, have a nice modding!'
+        )
         self.update_console('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
-        self.update_console('Modding Helper is not affiliated with any mod or modding community.')
-        self.update_console('Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.')
-        self.update_console('The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.')
-        self.update_console('Backup your current mods before installing new mods (highly recommended).')
-        self.update_console('If you have any problems, please contact the mod author, have a nice modding!')
+        self.update_console(
+            'Modding Helper is not affiliated with any mod or modding community.'
+        )
+        self.update_console(
+            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.'
+        )
+        self.update_console(
+            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.'
+        )
+        self.update_console(
+            'Backup your current mods before installing new mods (highly recommended).'
+        )
+        self.update_console(
+            'If you have any problems, please contact the mod author, have a nice modding!'
+        )
 
     def get_modrinth_project_info(self, modrinth_slug_name: str):
         mod_loader = 'fabric'
@@ -371,17 +389,21 @@ class ModdingHelperApp(QMainWindow):
         if self.nvidia_radio_no.isChecked():
             self.nvidia_radio_no.setChecked(False)
             print('OFF - Mods made for NVIDIA graphics cards will not be installed.')
-            self.update_console('OFF - Mods made for NVIDIA graphics cards will not be installed.')
+            self.update_console(
+                'OFF - Mods made for NVIDIA graphics cards will not be installed.'
+            )
 
     def on_nvidia_radio_no(self):
         if self.nvidia_radio_yes.isChecked():
             self.nvidia_radio_yes.setChecked(False)
             print('ON - Mods made for NVIDIA graphics cards will be installed.')
-            self.update_console('ON - Mods made for NVIDIA graphics cards will be installed.')
+            self.update_console(
+                'ON - Mods made for NVIDIA graphics cards will be installed.'
+            )
 
 
 if __name__ == '__main__':
-    app_version = '1.0.0'
+    app_version = '1.0.1'
     favicon_path = Path(environ['TEMP'], 'moddinghelper_favicon.ico')
     updater_api_base_url = 'https://raw.githubusercontent.com/Henrique-Coder/modding-helper/main/updater_api'
 
@@ -423,11 +445,10 @@ if __name__ == '__main__':
             )
         with open(modlist_path, 'r') as modlist_file:
             modlist_data = yaml_safe_load(modlist_file)
-    latest_app_version = str(get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text)
-    if (
-        app_version
-        != latest_app_version
-    ):
+    latest_app_version = str(
+        get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text
+    )
+    if app_version != latest_app_version:
         is_app_updated = False
     else:
         is_app_updated = True
@@ -442,7 +463,7 @@ if __name__ == '__main__':
     download_url = f'https://github.com/Henrique-Coder/modding-helper/releases/download/v{latest_app_version}/ModdingHelper-v{latest_app_version}-fabric-mc1.20.1.exe'
     if not is_app_updated:
         message_box = QMessageBox(window)
-        message_box.setWindowTitle('New version available')
+        message_box.setWindowTitle(f'New version available ({latest_app_version})')
         message_box.setText(
             'A new version of Modding Helper is available, please download it by clicking on the button below.'
         )
@@ -459,4 +480,5 @@ if __name__ == '__main__':
 
         if message_box.exec_() == QMessageBox.RejectRole:
             exit()
+        exit()
     exit(app.exec_())
