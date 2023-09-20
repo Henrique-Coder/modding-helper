@@ -6,5 +6,6 @@ __pycache__
 # Other folders/files
 .compiler
 .51
+.backups
 *.bat
 allmods.yaml
