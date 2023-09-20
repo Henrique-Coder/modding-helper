@@ -1,12 +1,15 @@
+from datetime import datetime
+from json import load as json_load
 from os import getlogin, makedirs, environ, remove
-from sys import argv, exit
+from pathlib import Path
 from re import compile
 from shutil import move, rmtree, copy
-from datetime import datetime
-from pathlib import Path
-from requests import get
 from subprocess import check_output
-from webbrowser import open as webopen
+from sys import argv, exit
+from webbrowser import open as web_open
+from zipfile import ZipFile
+
+from requests import get
 from yaml import safe_load as yaml_safe_load
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
@@ -36,12 +39,8 @@ class ModdingHelperApp(QMainWindow):
         self.setGeometry(100, 100, 940, 800)  # x, y, width, height
         self.setFixedSize(self.size())
 
-        self.nvidia_radio_yes = QRadioButton(
-            'Yes, I have an active NVIDIA graphics card.'
-        )
-        self.nvidia_radio_no = QRadioButton(
-            'No, I have a different graphics card or integrated graphics.'
-        )
+        self.nvidia_radio_yes = QRadioButton('Yes, I have an active NVIDIA graphics card.')
+        self.nvidia_radio_no = QRadioButton('No, I have a different graphics card or integrated graphics.')
 
         self.nvidia_radio_group = QButtonGroup()
         self.nvidia_radio_group.addButton(self.nvidia_radio_yes)
@@ -59,16 +58,12 @@ class ModdingHelperApp(QMainWindow):
         for mod in modlist_data['ui']:
             fancy_name = mod['name']
             checkbox = QtWidgets.QCheckBox(fancy_name)
-            checkbox.setToolTip(
-                f'Description: {mod["description"]}\nWebsite: {mod["website_url"]}'
-            )
+            checkbox.setToolTip(f'Description: {mod["description"]}\nWebsite: {mod["website_url"]}')
             checkbox.installEventFilter(self)
             self.mod_checkboxes.append(checkbox)
         revert_button = QPushButton('Revert to last backup')
         install_button = QPushButton('Install mods')
-        backup_checkbox = self.backup_checkbox = QtWidgets.QCheckBox(
-            'Backup current mods before installing'
-        )
+        backup_checkbox = self.backup_checkbox = QtWidgets.QCheckBox('Backup current mods before installing')
         backup_checkbox.setChecked(True)
 
         self.minecraft_dir_label = QLabel('Minecraft Directory:')
@@ -106,17 +101,11 @@ class ModdingHelperApp(QMainWindow):
         vbox = QVBoxLayout()
         vbox.addWidget(QLabel('<b>Modding Helper</b>'))
         vbox.addSpacing(10)
-        vbox.addWidget(
-            QLabel('Does your computer have an active NVIDIA graphics card?')
-        )
+        vbox.addWidget(QLabel('Does your computer have an active NVIDIA graphics card?'))
         vbox.addWidget(self.nvidia_radio_yes)
         vbox.addWidget(self.nvidia_radio_no)
         vbox.addSpacing(20)
-        vbox.addWidget(
-            QLabel(
-                'Select the extra mods you want to install (optimization mods will be installed automatically):'
-            )
-        )
+        vbox.addWidget(QLabel('Select the extra mods you want to install (optimization mods will be installed automatically):'))
         vbox.addLayout(select_deselect_layout)
         vbox.addLayout(checkbox_container_layout)
         vbox.addLayout(dir_layout)
@@ -144,37 +133,29 @@ class ModdingHelperApp(QMainWindow):
         select_all_button.clicked.connect(self.select_all)
         self.minecraft_dir_browse_button.clicked.connect(self.browse_minecraft_dir)
 
-        # Initial terminal message
-        print('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
-        print('Modding Helper is not affiliated with any mod or modding community.')
-        print(
-            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.'
+        all_mods_filenames = list(Path(self.minecraft_dir_text.text(), 'mods').iterdir())
+        all_user_mods_slug = list()
+        for filename in all_mods_filenames:
+            try:
+                with ZipFile(filename, 'r') as jar, jar.open('fabric.mod.json') as json_file:
+                    jar_data = json_load(json_file)
+                all_user_mods_slug.extend([jar_data['name'], jar_data['id']])
+            except Exception:
+                continue
+
+        all_user_mods_slug = list(dict.fromkeys(all_user_mods_slug))
+        [checkbox.setChecked(True) for checkbox in self.mod_checkboxes if checkbox.text() in all_user_mods_slug]
+
+        msg = (
+            f'Modding Helper [{app_version}] by @henrique-coder (GitHub)\n'
+            'Modding Helper is not affiliated with any mod or modding community.\n'
+            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.\n'
+            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.\n'
+            'Backup your current mods before installing new mods (recommended).\n'
+            'If you have any problems, feel free to open Issues in the GitHub repository. Have a nice modding!'
         )
-        print(
-            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.'
-        )
-        print(
-            'Backup your current mods before installing new mods (highly recommended).'
-        )
-        print(
-            'If you have any problems, please contact the mod author by opening a issue in GitHub, have a nice modding!'
-        )
-        self.update_console('Modding Helper [v1.0.0] by @henrique-coder (GitHub)')
-        self.update_console(
-            'Modding Helper is not affiliated with any mod or modding community.'
-        )
-        self.update_console(
-            'Modding Helper is not responsible for any damage caused to your computer or Minecraft installation.'
-        )
-        self.update_console(
-            'The mods are downloaded from Modrinth, all from version 1.20.1 (Fabric) and are always up to date.'
-        )
-        self.update_console(
-            'Backup your current mods before installing new mods (highly recommended).'
-        )
-        self.update_console(
-            'If you have any problems, please contact the mod author, have a nice modding!'
-        )
+        [print(line) for line in msg.strip().splitlines()]
+        [self.update_console(line) for line in msg.strip().splitlines()]
 
     def get_modrinth_project_info(self, modrinth_slug_name: str):
         mod_loader = 'fabric'
@@ -192,46 +173,31 @@ class ModdingHelperApp(QMainWindow):
     def show_revert_popup(self):
         makedirs('.backups', exist_ok=True)
         backup_folder_regex = compile(r'\d{4}\.\d{2}\.\d{2}-\d{2}\.\d{2}\.\d{2}\.\d{6}')
-        backup_folders = [
-            folder
-            for folder in Path('.backups').iterdir()
-            if backup_folder_regex.match(folder.name)
-        ]
+        backup_folders = [folder for folder in Path('.backups').iterdir() if backup_folder_regex.match(folder.name)]
+
         if not backup_folders:
-            print('No backups found!')
-            self.update_console('No backups found!')
-            QMessageBox.critical(
-                self,
-                'Error',
-                'No backups found!',
-                QMessageBox.Ok,
-                QMessageBox.Ok,
-            )
+            msg = 'No backups found!'
+            print(msg)
+            self.update_console(msg)
+            QMessageBox.critical(self, 'Error', 'No backups found!', QMessageBox.Ok, QMessageBox.Ok)
             return
-        reply = QMessageBox.question(
-            self,
-            'Warning',
-            'Are you sure you want to revert mods to last backup?',
-            QMessageBox.Yes | QMessageBox.No,
-            QMessageBox.No,
-        )
+
+        reply = QMessageBox.question(self, 'Warning', 'Are you sure you want to revert mods to the last backup?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
         if reply == QMessageBox.Yes:
             minecraft_dir = self.minecraft_dir_text.text()
             latest_backup = sorted(backup_folders)[-1]
-            for file in Path(minecraft_dir, 'mods').iterdir():
-                remove(file)
-            for file in latest_backup.iterdir():
-                move(file, Path(minecraft_dir, 'mods'))
+
+            [remove(file) for file in Path(minecraft_dir, 'mods').iterdir()]
+            [move(file, Path(minecraft_dir, 'mods')) for file in latest_backup.iterdir()]
             rmtree(latest_backup)
-            print(f'Mods reverted to the lastest backup! ({latest_backup.name})')
-            self.update_console(
-                f'Mods reverted to the lastest backup! ({latest_backup.name})'
-            )
+
+            msg = f'Mods reverted to the latest backup! ({latest_backup.name})'
+            print(msg)
+            self.update_console(msg)
 
     def install_mods(self):
-        selected_mods = [
-            checkbox.text() for checkbox in self.mod_checkboxes if checkbox.isChecked()
-        ]
+        selected_mods = [checkbox.text() for checkbox in self.mod_checkboxes if checkbox.isChecked()]
         backup_selected = self.backup_checkbox.isChecked()
         minecraft_dir = self.minecraft_dir_text.text()
 
@@ -248,87 +214,101 @@ class ModdingHelperApp(QMainWindow):
         # self.install_button.setEnabled(False)
         # self.backup_checkbox.setEnabled(False)
 
-        print('Downloading mods...')
-        self.update_console('Downloading mods...')
-
         if backup_selected:
             now_time_formatted = datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")
-            makedirs(Path(f'.backups/{now_time_formatted}'), exist_ok=True)
-            for file in Path(minecraft_dir, 'mods').iterdir():
-                copy(file, Path('.backups', now_time_formatted))
+            Path(f'.backups/{now_time_formatted}').mkdir(parents=True, exist_ok=True)
+            [copy(file, Path('.backups', now_time_formatted)) for file in Path(minecraft_dir, 'mods').iterdir()]
+            msg = 'Backup completed!'
+            print(msg)
+            self.update_console(msg)
+
         these_mod_filenames = list()
+
+        msg = 'Downloading mods...'
+        print(msg)
+        self.update_console(msg)
 
         for mod in modlist_data['mod_libs']:
             mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
             these_mod_filenames.append(mod_filename)
             if Path(minecraft_dir, 'mods', mod_filename).exists():
-                print(f'Mod {mod["name"]} is already installed!')
-                self.update_console(f'Mod {mod["name"]} is already installed!')
+                msg = f'Mod {mod["name"]} is already installed!'
+                print(msg)
+                self.update_console(msg)
                 continue
             if not mod_filename or not mod_download_url:
-                print(f'Error downloading mod: {mod["name"]}')
-                self.update_console(f'Error downloading mod: {mod["name"]}')
+                msg = f'Error downloading mod: {mod["name"]}'
+                print(msg)
+                self.update_console(msg)
                 continue
             with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                 mod_file.write(get(mod_download_url, allow_redirects=True).content)
-            print(f'Mod {mod["name"]} was successfully installed!')
-            self.update_console(f'Mod {mod["name"]} was successfully installed!')
+            msg = f'Mod {mod["name"]} was successfully installed!'
+            print(msg)
+            self.update_console(msg)
         if self.nvidia_radio_yes.isChecked():
             for mod in modlist_data['nvidia_gpu']:
-                mod_filename, mod_download_url = self.get_modrinth_project_info(
-                    mod['slug']
-                )
+                mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
                 these_mod_filenames.append(mod_filename)
                 if Path(minecraft_dir, 'mods', mod_filename).exists():
-                    print(f'Mod {mod["name"]} is already installed!')
-                    self.update_console(f'Mod {mod["name"]} is already installed!')
+                    msg = f'Mod {mod["name"]} is already installed!'
+                    print(msg)
+                    self.update_console(msg)
                     continue
                 if not mod_filename or not mod_download_url:
-                    print(f'Error downloading mod: {mod["name"]}')
-                    self.update_console(f'Error downloading mod: {mod["name"]}')
+                    msg = f'Error downloading mod: {mod["name"]}'
+                    print(msg)
+                    self.update_console(msg)
                     continue
                 with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                     mod_file.write(get(mod_download_url, allow_redirects=True).content)
-                print(f'Mod {mod["name"]} was successfully installed!')
-                self.update_console(f'Mod {mod["name"]} was successfully installed!')
+                msg = f'Mod {mod["name"]} was successfully installed!'
+                print(msg)
+                self.update_console(msg)
         for mod in modlist_data['optimization']:
             mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
             these_mod_filenames.append(mod_filename)
             if Path(minecraft_dir, 'mods', mod_filename).exists():
-                print(f'Mod {mod["name"]} is already installed!')
-                self.update_console(f'Mod {mod["name"]} is already installed!')
+                msg = f'Mod {mod["name"]} is already installed!'
+                print(msg)
+                self.update_console(msg)
                 continue
             if not mod_filename or not mod_download_url:
-                print(f'Error downloading mod: {mod["name"]}')
-                self.update_console(f'Error downloading mod: {mod["name"]}')
+                msg = f'Error downloading mod: {mod["name"]}'
+                print(msg)
+                self.update_console(msg)
                 continue
             with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                 mod_file.write(get(mod_download_url, allow_redirects=True).content)
-            print(f'Mod {mod["name"]} was successfully installed!')
-            self.update_console(f'Mod {mod["name"]} was successfully installed!')
+            msg = f'Mod {mod["name"]} was successfully installed!'
+            print(msg)
+            self.update_console(msg)
         for mod in modlist_data['ui']:
             if mod['name'] in selected_mods:
-                mod_filename, mod_download_url = self.get_modrinth_project_info(
-                    mod['slug']
-                )
+                mod_filename, mod_download_url = self.get_modrinth_project_info(mod['slug'])
                 these_mod_filenames.append(mod_filename)
                 if Path(minecraft_dir, 'mods', mod_filename).exists():
-                    print(f'Mod {mod["name"]} is already installed!')
-                    self.update_console(f'Mod {mod["name"]} is already installed!')
+                    msg = f'Mod {mod["name"]} is already installed!'
+                    print(msg)
+                    self.update_console(msg)
                     continue
                 if not mod_filename or not mod_download_url:
-                    print(f'Error downloading mod: {mod["name"]}')
-                    self.update_console(f'Error downloading mod: {mod["name"]}')
+                    msg = f'Error downloading mod: {mod["name"]}'
+                    print(msg)
+                    self.update_console(msg)
                     continue
                 with open(Path(minecraft_dir, 'mods', mod_filename), 'wb') as mod_file:
                     mod_file.write(get(mod_download_url, allow_redirects=True).content)
-                print(f'Mod {mod["name"]} was successfully installed!')
-                self.update_console(f'Mod {mod["name"]} was successfully installed!')
+                msg = f'Mod {mod["name"]} was successfully installed!'
+                print(msg)
+                self.update_console(msg)
         for file in Path(minecraft_dir, 'mods').iterdir():
             if file.name.endswith('.jar') and file.name not in these_mod_filenames:
                 remove(file)
-                print(f'Old mod {file.name} was successfully removed!')
-                self.update_console(f'Old mod {file.name} was successfully removed!')
+                msg = f'Old mod {file.name} was successfully removed!'
+                print(msg)
+                self.update_console(msg)
+
         # TODO: asyncronous install
         # self.nvidia_radio_yes.setEnabled(True)
         # self.nvidia_radio_no.setEnabled(True)
@@ -342,8 +322,9 @@ class ModdingHelperApp(QMainWindow):
         # self.install_button.setEnabled(True)
         # self.backup_checkbox.setEnabled(True)
 
-        print('All mods were successfully installed!')
-        self.update_console('All mods were successfully installed!')
+        msg = 'All mods were successfully installed!'
+        print(msg)
+        self.update_console(msg)
 
     def deselect_all(self):
         for checkbox in self.mod_checkboxes:
@@ -353,120 +334,83 @@ class ModdingHelperApp(QMainWindow):
         for checkbox in self.mod_checkboxes:
             checkbox.setChecked(True)
 
-    def update_console(self, message):
-        timestamp = QtCore.QDateTime.currentDateTime().toString(
-            '[yyyy.MM.dd-hh:mm:ss.zzz]'
-        )
-        new_text = f'{timestamp} {message}'
-        self.console_textedit.append(new_text)
+    def update_console(self, msg):
+        timestamp = QtCore.QDateTime.currentDateTime().toString('[yyyy.MM.dd-hh:mm:ss.zzz]')
+        self.console_textedit.append(f'{timestamp} {msg}')
 
     def eventFilter(self, obj, event):
         if event.type() == QtCore.QEvent.ContextMenu and obj in self.mod_checkboxes:
             menu = QtWidgets.QMenu(self)
-            open_action = menu.addAction(f'Open {obj.text()} website')
-            action = menu.exec_(event.globalPos())
-            if action == open_action:
-                QtGui.QDesktopServices.openUrl(
-                    QtCore.QUrl(self.get_website_url_by_name(obj.text()))
-                )
-            return True
+            action = menu.addAction(f'Open {obj.text()} website')
+            if menu.exec_(event.globalPos()) == action:
+                QtGui.QDesktopServices.openUrl(QtCore.QUrl(self.get_website_url_by_name(obj.text())))
+                return True
         return False
 
     def get_website_url_by_name(self, name):
-        for mod in modlist_data['ui']:
-            if mod['name'] == name:
-                return mod['website_url']
-        return None
+        return next((mod['website_url'] for mod in modlist_data['ui'] if mod['name'] == name), None)
 
     def browse_minecraft_dir(self):
-        dir_path = QFileDialog.getExistingDirectory(
-            self, 'Select your .minecraft directory', self.minecraft_dir_text.text()
-        )
+        dir_path = QFileDialog.getExistingDirectory(self, 'Select your .minecraft directory', self.minecraft_dir_text.text())
         if dir_path:
             self.minecraft_dir_text.setText(dir_path)
 
     def on_nvidia_radio_yes(self):
         if self.nvidia_radio_no.isChecked():
             self.nvidia_radio_no.setChecked(False)
-            print('OFF - Mods made for NVIDIA graphics cards will not be installed.')
-            self.update_console(
-                'OFF - Mods made for NVIDIA graphics cards will not be installed.'
-            )
+            msg = 'OFF - Mods made for NVIDIA graphics cards will not be installed.'
+            print(msg)
+            self.update_console(msg)
 
     def on_nvidia_radio_no(self):
         if self.nvidia_radio_yes.isChecked():
             self.nvidia_radio_yes.setChecked(False)
-            print('ON - Mods made for NVIDIA graphics cards will be installed.')
-            self.update_console(
-                'ON - Mods made for NVIDIA graphics cards will be installed.'
-            )
+            msg = 'ON - Mods made for NVIDIA graphics cards will be installed.'
+            print(msg)
+            self.update_console(msg)
 
 
 if __name__ == '__main__':
-    app_version = '1.0.1'
+    app_version = '1.0.2'
+    mc_version = '1.20.1'
+    mc_loader = 'fabric'
     favicon_path = Path(environ['TEMP'], 'moddinghelper_favicon.ico')
     updater_api_base_url = 'https://raw.githubusercontent.com/Henrique-Coder/modding-helper/main/updater_api'
 
     if not favicon_path.exists():
-        with open(favicon_path, 'wb') as favicon_file:
-            favicon_file.write(
-                get(
-                    f'{updater_api_base_url}/favicon.ico',
-                    allow_redirects=True,
-                ).content
-            )
+        open(favicon_path, 'wb').write(get(f'{updater_api_base_url}/favicon.ico', allow_redirects=True).content)
+
     modlist_path = Path(environ['TEMP'], 'moddinghelper_modlist.yaml')
     if modlist_path.exists():
-        latest_modlist_version = str(
-            get(
-                f'{updater_api_base_url}/modlist_version.txt',
-                allow_redirects=True,
-            ).text
-        )
+        latest_modlist_version = get(f'{updater_api_base_url}/modlist_version.txt', allow_redirects=True).text
         with open(modlist_path, 'r') as modlist_file:
             modlist_data = yaml_safe_load(modlist_file)
         if str(modlist_data['version']) != latest_modlist_version:
             with open(modlist_path, 'wb') as modlist_file:
                 modlist_file.write(
-                    get(
-                        f'{updater_api_base_url}/modlist.yaml',
-                        allow_redirects=True,
-                    ).content
-                )
+                    get(f'{updater_api_base_url}/modlist.yaml', allow_redirects=True).content)
             with open(modlist_path, 'r') as modlist_file:
                 modlist_data = yaml_safe_load(modlist_file)
     else:
         with open(modlist_path, 'wb') as modlist_file:
             modlist_file.write(
-                get(
-                    f'{updater_api_base_url}/modlist.yaml',
-                    allow_redirects=True,
-                ).content
-            )
+                get(f'{updater_api_base_url}/modlist.yaml', allow_redirects=True).content)
         with open(modlist_path, 'r') as modlist_file:
             modlist_data = yaml_safe_load(modlist_file)
-    latest_app_version = str(
-        get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text
-    )
-    if app_version != latest_app_version:
-        is_app_updated = False
-    else:
-        is_app_updated = True
+    latest_app_version = get(f'{updater_api_base_url}/app_version.txt', allow_redirects=True).text
+    is_app_updated = app_version == latest_app_version
+
     app = QApplication(argv)
     app.setWindowIcon(QtGui.QIcon(str(favicon_path)))
     window = ModdingHelperApp()
-    window.setWindowTitle(
-        f'Modding Helper {app_version} [Modlist: {modlist_data["version"]}]'
-    )
+    window.setWindowTitle(f'Modding Helper {app_version} (Modlist {modlist_data["version"]}) - Minecraft {mc_version} ({mc_loader.title()})')
     window.show()
 
     download_url = f'https://github.com/Henrique-Coder/modding-helper/releases/download/v{latest_app_version}/ModdingHelper-v{latest_app_version}-fabric-mc1.20.1.exe'
     if not is_app_updated:
         message_box = QMessageBox(window)
         message_box.setWindowTitle(f'New version available ({latest_app_version})')
-        message_box.setText(
-            'A new version of Modding Helper is available, please download it by clicking on the button below.'
-        )
+        message_box.setText('A new version of Modding Helper is available, please download it by clicking on the button below.')
 
         exit_button = QPushButton('Exit')
         download_button = QPushButton('Download')
@@ -476,7 +420,7 @@ if __name__ == '__main__':
         message_box.setDefaultButton(download_button)
 
         exit_button.clicked.connect(lambda: exit())
-        download_button.clicked.connect(lambda: webopen(download_url))
+        download_button.clicked.connect(lambda: web_open(download_url))
 
         if message_box.exec_() == QMessageBox.RejectRole:
             exit()
