@@ -1,4 +1,4 @@
-version: 63
+version: 64
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -23,7 +23,8 @@ mod_libs:
   website_url: https://modrinth.com/mod/fabric-api
 - name: Fabric Language Kotlin
   slug: fabric-language-kotlin
-  description: Fabric Language Kotlin
+  description: This is a mod that enables usage of the Kotlin programming language
+    for Fabric mods.
   website_url: https://modrinth.com/mod/fabric-language-kotlin
 - name: libIPN
   slug: libipn
@@ -547,10 +548,6 @@ ui:
   description: Take control over you inventory. Sort. Move matching Items. Throw all.
     Locked slots. Gear sets! And much more.
   website_url: https://modrinth.com/mod/inventory-profiles-next
-- name: MineMath
-  slug: minemath
-  description: MineMath - Your Mathematical GUI Calculator Companion in Minecraft
-  website_url: https://modrinth.com/mod/minemath
 - name: Emotecraft
   slug: emotecraft
   description: Create your own emotes in Minecraft.
@@ -560,17 +557,15 @@ ui:
   description: Allows players to see each other's emotes without emotecraft installed
     on the server.
   website_url: https://modrinth.com/mod/online-emotes
-- name: ChatShot
-  slug: chatshot
-  description: Copy chat messages as text or a nice transparent image with one click.
-  website_url: https://modrinth.com/mod/chatshot
-- name: TierTagger (View other tiers!)
-  slug: tiertagger
-  description: A awesome mod which displays everyone's tier from the Vanilla Pvp Tierlist
-  website_url: https://modrinth.com/mod/tiertagger
-- name: Stop P2W
-  slug: stopp2w
-  description: 'The best option to prevent Pay To Win!
-
-    Live Server Data!'
-  website_url: https://modrinth.com/mod/stopp2w
+- name: CalcMod
+  slug: calcmod
+  description: A calculator in your chat with shortcuts designed for Minecraft
+  website_url: https://modrinth.com/mod/calcmod
+- name: TPS HUD
+  slug: tps-hud
+  description: A fully customizable mod for fabric that displays the servers tps.
+  website_url: https://modrinth.com/mod/tps-hud
+- name: Classic and simple status bars
+  slug: cssb
+  description: A bar shaped status bar mod that supports linking some mods.
+  website_url: https://modrinth.com/mod/cssb
