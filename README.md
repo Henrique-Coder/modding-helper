@@ -1,1 +1,1 @@
-![Image demonstrating the app's home screen](https://i.imgur.com/mR1Ee3C.png)
+![Image demonstrating the latest app's home screen](https://raw.githubusercontent.com/Henrique-Coder/modding-helper/main/.github/screenshots/home/1.0.2.png)
