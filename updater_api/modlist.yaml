@@ -1,4 +1,4 @@
-version: 64
+version: 65
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -66,6 +66,10 @@ mod_libs:
   slug: ukulib
   description: small utility library used in my mods
   website_url: https://modrinth.com/mod/ukulib
+- name: Architectury API
+  slug: architectury-api
+  description: An intermediary api aimed to ease developing multiplatform mods.
+  website_url: https://modrinth.com/mod/architectury-api
 nvidia_gpu:
 - name: Nvidium
   slug: nvidium
@@ -252,7 +256,7 @@ ui:
   website_url: https://modrinth.com/mod/better-stats
 - name: Blur (Fabric)
   slug: blur-fabric
-  description: Adds a blur effect to all GUI backgrounds - now for Fabric!
+  description: Adds a blur effect to all GUI backgrounds - now for Fabric (and Quilt)!
   website_url: https://modrinth.com/mod/blur-fabric
 - name: BoatHud
   slug: boathud
@@ -454,9 +458,9 @@ ui:
   website_url: https://modrinth.com/mod/xaeros-world-map
 - name: Xaero's Minimap
   slug: xaeros-minimap
-  description: Displays the nearby world terrain, players, mobs, entities in the corner
-    of your screen. Lets you create waypoints which help you find the locations you've
-    marked.
+  description: Displays a map of the nearby world terrain, players, mobs, entities
+    in the corner of your screen. Lets you create waypoints which help you find the
+    locations you've marked.
   website_url: https://modrinth.com/mod/xaeros-minimap
 - name: Zoomify
   slug: zoomify
