@@ -8,7 +8,6 @@ from subprocess import check_output
 from sys import argv, exit
 from webbrowser import open as web_open
 from zipfile import ZipFile
-
 from requests import get
 from yaml import safe_load as yaml_safe_load
 from PyQt5 import QtCore, QtGui, QtWidgets

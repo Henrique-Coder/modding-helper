@@ -1,4 +1,4 @@
-version: 65
+version: 66
 mod_libs:
 - name: Bookshelf
   slug: bookshelf-lib
@@ -186,7 +186,8 @@ optimization:
   website_url: https://modrinth.com/mod/modmenu
 - name: Noxesium
   slug: noxesium
-  description: A client-side fabric mod with various changes and performance improvements.
+  description: Improves client performance and play experience on large multiplayer
+    servers.
   website_url: https://modrinth.com/mod/noxesium
 - name: Reese's Sodium Options
   slug: reeses-sodium-options
@@ -508,7 +509,8 @@ ui:
   website_url: https://modrinth.com/mod/pandas-extra-details
 - name: myl7/autofish
   slug: myl7autofish
-  description: 'Fork of MrTroot/autofish to build for Minecraft post-1.19.3 versions.
+  description: 'See XPlus Autofish instead. Fork of MrTroot/autofish to build for
+    Minecraft post-1.19.3 versions.
 
     Changes are from the upstream pull requests and stated in the commit messages.'
   website_url: https://modrinth.com/mod/myl7autofish
